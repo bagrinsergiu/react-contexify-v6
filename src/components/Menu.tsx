@@ -249,13 +249,13 @@ export const Menu: React.FC<MenuProps> = ({
 
   function computeAnimationClasses() {
     if (isStr(animation)) {
-      return cx({
+      return cx.clsx({
         [`${CssClass.animationWillEnter}${animation}`]: visible && !willLeave,
         [`${CssClass.animationWillLeave}${animation} ${CssClass.animationWillLeave}'disabled'`]:
           visible && willLeave,
       });
     } else if (animation && 'enter' in animation && 'exit' in animation) {
-      return cx({
+      return cx.clsx({
         [`${CssClass.animationWillEnter}${animation.enter}`]:
           animation.enter && visible && !willLeave,
         [`${CssClass.animationWillLeave}${animation.exit} ${CssClass.animationWillLeave}'disabled'`]:
@@ -267,7 +267,7 @@ export const Menu: React.FC<MenuProps> = ({
   }
 
   const { visible, triggerEvent, propsFromTrigger, x, y, willLeave } = state;
-  const cssClasses = cx(
+  const cssClasses = cx.clsx(
     CssClass.menu,
     className,
     { [`${CssClass.theme}${theme}`]: theme },
