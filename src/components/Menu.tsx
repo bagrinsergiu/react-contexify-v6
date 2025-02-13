@@ -136,13 +136,12 @@ export const Menu: React.FC<MenuProps> = ({
     return { x, y };
   }
 
-  console.log("works")
   // when the menu is transitioning from not visible to visible,
   // the nodeRef is attached to the dom element this let us check the boundaries
-  // useEffect(() => {
-  //   // state.visible and state{x,y} are updated together
-  //   if (state.visible) setState(checkBoundaries(state.x, state.y));
-  // }, [state.visible]);
+  useEffect(() => {
+    // state.visible and state{x,y} are updated together
+    if (state.visible) setState(checkBoundaries(state.x, state.y));
+  }, [state.visible]);
 
   // subscribe dom events
   useEffect(() => {
