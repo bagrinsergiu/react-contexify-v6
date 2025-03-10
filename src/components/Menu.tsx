@@ -181,13 +181,19 @@ export const Menu: React.FC<MenuProps> = ({
     }
 
     if (state.visible) {
-      window.parent.document.addEventListener('keydown', handleKeyboard);
+      nodeRef.current?.ownerDocument.addEventListener(
+        'keydown',
+        handleKeyboard
+      );
 
       for (const ev of hideOnEvents) window.document.addEventListener(ev, hide);
     }
 
     return () => {
-      window.parent.document.removeEventListener('keydown', handleKeyboard);
+      nodeRef.current?.ownerDocument.removeEventListener(
+        'keydown',
+        handleKeyboard
+      );
 
       for (const ev of hideOnEvents) window.document.removeEventListener(ev, hide);
     };
