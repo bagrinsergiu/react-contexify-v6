@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef } from 'react';
-import cx from 'clsx';
+import { clsx } from 'clsx';
 
 import {
   ItemParams,
@@ -203,7 +203,7 @@ export const Item: React.FC<ItemProps> = ({
   return (
     <div
       {...{ ...rest, [handlerEvent]: handleClick }}
-      className={cx.clsx(CssClass.item, className, {
+      className={clsx(CssClass.item, className, {
         [`${CssClass.itemDisabled}`]: isDisabled,
       })}
       style={style}
