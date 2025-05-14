@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef } from 'react';
-import cx from 'clsx';
+import { clsx } from 'clsx';
 
 import { InternalProps, BooleanPredicate, HandlerParamsEvent } from '../types';
 import {
@@ -92,7 +92,7 @@ export const Submenu: React.FC<SubMenuProps> = ({
 
   if (isHidden) return null;
 
-  const cssClasses = cx.clsx(CssClass.item, className, {
+  const cssClasses = clsx(CssClass.item, className, {
     [`${CssClass.itemDisabled}`]: isDisabled,
   });
 
