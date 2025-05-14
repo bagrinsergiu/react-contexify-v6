@@ -1,5 +1,5 @@
 import React from 'react';
-import cx from 'clsx';
+import { clsx } from 'clsx';
 
 import { CssClass } from '../constants';
 
@@ -8,5 +8,5 @@ export interface RightSlotProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const RightSlot: React.FC<RightSlotProps> = ({ className, ...rest }) => (
-  <div className={cx.clsx(CssClass.rightSlot, className)} {...rest} />
+  <div className={clsx(CssClass.rightSlot, className)} {...rest} />
 );

@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef } from 'react';
-import cx from 'clsx';
+import { clsx } from 'clsx';
 
 import {
   ItemParams,
@@ -158,14 +158,23 @@ export const Item: React.FC<ItemProps> = ({
   // provide a feedback to the user that the item has been clicked before closing the menu
   function dispatchUserHanlder() {
     const node = itemNode.current!;
+
     node.focus();
-    node.addEventListener(
-      'animationend',
-      // defer, required for react 17
-      () => setTimeout(contextMenu.hideAll),
-      { once: true }
-    );
     node.classList.add(CssClass.itemClickedFeedback);
+
+    const hideMenu = () => {
+      setTimeout(contextMenu.hideAll, 0);
+    };
+
+    const hasAnimations =
+        window.getComputedStyle(node).animationName !== 'none';
+
+    if (hasAnimations) {
+      node.addEventListener('animationend', () => hideMenu(), { once: true });
+    } else {
+      hideMenu();
+    }
+
     onClick(handlerParams);
   }
 
@@ -203,7 +212,7 @@ export const Item: React.FC<ItemProps> = ({
   return (
     <div
       {...{ ...rest, [handlerEvent]: handleClick }}
-      className={cx.clsx(CssClass.item, className, {
+      className={clsx(CssClass.item, className, {
         [`${CssClass.itemDisabled}`]: isDisabled,
       })}
       style={style}
