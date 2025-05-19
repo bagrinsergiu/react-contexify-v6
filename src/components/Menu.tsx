@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import cx from 'clsx';
+import { clsx } from 'clsx';
 
 import { ItemTrackerProvider } from './ItemTrackerProvider';
 
@@ -182,17 +182,21 @@ export const Menu: React.FC<MenuProps> = ({
 
     if (state.visible) {
       nodeRef.current?.ownerDocument.addEventListener(
-          'keydown',
-          handleKeyboard
+        'keydown',
+        handleKeyboard
       );
 
       for (const ev of hideOnEvents) window.document.addEventListener(ev, hide);
     }
 
     return () => {
-      nodeRef.current?.ownerDocument.removeEventListener('keydown', handleKeyboard);
+      nodeRef.current?.ownerDocument.removeEventListener(
+        'keydown',
+        handleKeyboard
+      );
 
-      for (const ev of hideOnEvents) window.document.removeEventListener(ev, hide);
+      for (const ev of hideOnEvents)
+        window.document.removeEventListener(ev, hide);
     };
   }, [state.visible, menuController, preventDefaultOnKeydown]);
 
@@ -253,13 +257,13 @@ export const Menu: React.FC<MenuProps> = ({
 
   function computeAnimationClasses() {
     if (isStr(animation)) {
-      return cx.clsx({
+      return clsx({
         [`${CssClass.animationWillEnter}${animation}`]: visible && !willLeave,
         [`${CssClass.animationWillLeave}${animation} ${CssClass.animationWillLeave}'disabled'`]:
           visible && willLeave,
       });
     } else if (animation && 'enter' in animation && 'exit' in animation) {
-      return cx.clsx({
+      return clsx({
         [`${CssClass.animationWillEnter}${animation.enter}`]:
           animation.enter && visible && !willLeave,
         [`${CssClass.animationWillLeave}${animation.exit} ${CssClass.animationWillLeave}'disabled'`]:
@@ -271,7 +275,7 @@ export const Menu: React.FC<MenuProps> = ({
   }
 
   const { visible, triggerEvent, propsFromTrigger, x, y, willLeave } = state;
-  const cssClasses = cx.clsx(
+  const cssClasses = clsx(
     CssClass.menu,
     className,
     { [`${CssClass.theme}${theme}`]: theme },
