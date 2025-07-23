@@ -29,5 +29,5 @@ export const hideOnEvents: (keyof GlobalEventHandlersEventMap)[] = [
   'scroll',
 
   // comment blur in dev so you can toggle console without closing the menu
-  'blur',
+  // 'blur',
 ];
